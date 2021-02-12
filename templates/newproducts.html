@@ -1,0 +1,124 @@
+{% extends 'base.html' %} {% block title %} All Products {% endblock %} {% block
+content %}
+<div class="container-fluid-mt-2">
+  <div class="row">
+    <!--all products-->
+    <div id="products" class="col-lg-10 mx-auto">
+      <div class="container">
+        <!--Slideshow starts here -->
+        {% for cat in allcategories %}
+
+        <h5
+          class="my-4 font-weight-bold position-sticky box-element"
+          style="display: inline-block"
+        >
+          <strong> Flash Sale On {{product.0.category}}</strong> - Recommended
+          Items
+        </h5>
+        <div class="row">
+          <div
+            id="demo{{forloop.counter}}"
+            class="col carousel slide my-3 w-auto"
+            id="{{product.id}}style"
+            ="width: fit-content;"
+            data-ride="carousel"
+          >
+            <ul class="carousel-indicators">
+              <li
+                data-target="#demo{{forloop.counter}}"
+                data-slide-to="0"
+                class="active"
+              ></li>
+              {% for i in range %}
+              <li
+                data-target="#demo{{forloop.parentloop.counter}}"
+                data-slide-to="{{i}}"
+              ></li>
+              {% endfor %}
+            </ul>
+            <div class="container carousel-inner no-padding">
+              <div class="carousel-item active">
+                {% for p in cat.product_set.all %}
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                  <div
+                    class="card align-items-center align-self-center box-element"
+                    style="width: 18rem"
+                  >
+                    <img
+                      src="{{p.image.url}}"
+                      class="row-image figure-img"
+                      alt="..."
+                    />
+                    <div class="card-body">
+                      <h5
+                        class="text-danger shadow-sm"
+                        style="display: inline-block"
+                        id="namepr{{i.id}}"
+                      >
+                        {{ p.title }}
+                      </h5>
+                      <p
+                        class="font-weight-bold table-warning bottom position-sticky"
+                      >
+                        {{i.desc|slice:"0:25"}}...
+                      </p>
+
+                      <h6
+                        class="border-bottom font-weight-bolder position-sticky"
+                      >
+                        Price: <span id="pricepr{{i.id}}">{{i.price}}</span>
+                      </h6>
+                      <span id="divpr{{i.id}}" class="divpr">
+                        <button
+                          id="{% url 'ecomapp:addtocart' p.id %}"
+                          class="btn btn-danger cart"
+                        >
+                          Add To Cart
+                        </button>
+                      </span>
+                      <a href="/shop/products/{{i.id}}"
+                        ><button
+                          id="qv{{i.id}}"
+                          class="btn btn-outline-danger cart"
+                        >
+                          QuickView
+                        </button></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and
+                not forloop.last %}
+              </div>
+              <div class="carousel-item">
+              {% endif %}
+               {% endfor %}
+               </div>
+            </div>
+          </div>
+          <!-- left and right controls for the slide -->
+          <a
+            class="carousel-control-prev"
+            href="#demo{{forloop.counter}}"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#demo{{forloop.counter}}"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %} 
+
+
+{% endblock %}
