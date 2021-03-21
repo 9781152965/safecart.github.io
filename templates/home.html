@@ -5,6 +5,10 @@
    .m-4 {
     margin: 0.5rem!important;
 }
+element.style {
+    color: crimson;
+}
+
 .bg-danger {
     background-color: #6ceaa8!important;
 }
@@ -118,11 +122,7 @@ body {
 
 
 
-element.style {
-    height: 200px;
-    object-fit: contain;
-    width: 265px;
-}
+
 .btn-primary {
     color: #151617;
     background-color: #63efa5;
@@ -157,7 +157,9 @@ a {
             <div class="m-4 " >
                 <h4><a class="list-group-item-action " href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></h4>
                 <img src="{{p.image.url}}" alt="" class="thumbnail" style="height: 200px; object-fit: contain;width: 265px"> <hr>
-                <p class="mt-3">Price: <strike>Rs. {{p.marked_price}}</strike> Rs. {{p.selling_price}}</p>
+                <p class="mt-3" >Price: <strike style="
+                  color: crimson;
+              ">Rs. {{p.marked_price}}</strike> Rs. {{p.selling_price}}</p>
                 <a href="{% url 'ecomapp:addtocart' p.id %}" class="btn btn-warning">Add To Cart</a>
                 <a href="{% url 'ecomapp:productdetail' p.slug %}" class="btn btn-danger">View</a>
             </div>
